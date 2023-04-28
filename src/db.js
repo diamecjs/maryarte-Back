@@ -61,17 +61,17 @@ const { Category, User, Product,Ticket } = sequelize.models;
 Category.belongsToMany(Product, {through : 'category_product'})
 Product.belongsToMany(Category, {through : 'category_product'})
 
-Product.belongsToMany(User, {through : 'product_user'})
-User.belongsToMany(Product, {through : 'product_user'})
+// Product.belongsToMany(User, {through : 'product_user'})
+// User.belongsToMany(Product, {through : 'product_user'})
 
-Ticket.belongsToMany(User, {through : 'Ticket_user'})
-User.belongsToMany(Ticket, {through : 'Ticket_user'})
+// Ticket.belongsToMany(User, {through : 'Ticket_user'})
+// User.belongsToMany(Ticket, {through : 'Ticket_user'})
 
-Product.belongsToMany(Ticket, {through : 'product_ticket'})
-Ticket.belongsToMany(Product, {through : 'product_Ticket'})
+// Product.belongsToMany(Ticket, {through : 'product_ticket'})
+// Ticket.belongsToMany(Product, {through : 'product_Ticket'})
 
-Favorite.belongsToMany(User, {through : 'favorite_user'})
-User.belongsToMany(Favorite, {through : 'favorite_user'})
+// Favorite.belongsToMany(User, {through : 'favorite_user'})
+// User.belongsToMany(Favorite, {through : 'favorite_user'})
 
 
 
