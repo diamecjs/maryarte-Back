@@ -6,7 +6,7 @@ const { Product } = require("../db");
 const router = Router();
 
 router.post("/", async (req, res) => {
-  const { name, image, description, disponible, category, price} = req.body;
+  const { name, image, description, disponible, category, price,quantity} = req.body;
   try {
     const product = await Product.create({
       name,
@@ -15,6 +15,7 @@ router.post("/", async (req, res) => {
       disponible,
       category,
       price,
+      quantity,
     });
 
     return res.status(200).send(product);

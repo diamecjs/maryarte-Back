@@ -32,7 +32,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-   
+    quantity: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+      allowNull: false,
+    },
   });
   Product.associate = (models) => {
     Product.belongsToMany(models.Category, { through: "category_product" });
