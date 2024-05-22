@@ -9,11 +9,11 @@ const {
    
 
 const port = process.env.PORT ;
-// Syncing all the models at once
+
 conn.sync({ force: false}).then(async () => {
     loadCategory();
     server.listen(port, () => {
-        console.log(`servidor corriendo en puerto: ${port}`); // eslint-disable-line no-console
+        console.log(`servidor corriendo en puerto: ${port}`); 
     });
 
 });
