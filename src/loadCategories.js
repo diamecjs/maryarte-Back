@@ -1,4 +1,4 @@
-const { Category } = require("../db");
+const { Category } = require("../src/db");
 
 const path = require("path");
 const fs = require("fs");
