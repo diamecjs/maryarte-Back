@@ -3,27 +3,32 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME, DATABASE_URL, NODE_ENV
+  DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME, 
 } = process.env;
 
 let sequelize;
 
-if (NODE_ENV === "production") {
-  sequelize = new Sequelize(DATABASE_URL, {
+if (process.env.NODE_ENV === "production") {
+  sequelize = new Sequelize({
+    database: DB_NAME,
     dialect: "postgres",
-    protocol: "postgres",
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-      keepAlive: true,
-    },
+    host: DB_HOST,
+    port: DB_PORT,
+    username: DB_USER,
+    password: DB_PASSWORD,
     pool: {
       max: 3,
       min: 1,
       idle: 10000,
     },
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false, 
+      },
+      keepAlive: true,
+    },
+    ssl: true,
   });
 } else {
   sequelize = new Sequelize(
@@ -50,7 +55,9 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
+
 const { Category, Cart, Product, Ticket } = sequelize.models;
+
 
 Category.belongsToMany(Product, { through: 'category_product' });
 Product.belongsToMany(Category, { through: 'category_product' });
@@ -59,6 +66,6 @@ Product.belongsToMany(Cart, { through: 'product_cart' });
 Cart.belongsToMany(Product, { through: 'product_cart' });
 
 module.exports = {
-  ...sequelize.models,
-  conn: sequelize,
+  ...sequelize.models, 
+  conn: sequelize,     
 };
